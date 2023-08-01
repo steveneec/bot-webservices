@@ -1,15 +1,16 @@
+#!pip install transformers==4.28.1 soundfile sentencepiece torchaudio pydub
 from transformers import *
 import torch
 import soundfile as sf
-# import librosa
 import os
 import torchaudio
+import sys
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-audio_url =  "D:\\UCE\\Mineria de datos\\Project\\bmo-webservices\\src\\python\\scripts\\test.wav"
+audio_url = sys.argv[1]
 
-whisper_model_name = "openai/whisper-small" # multilingual, ~ 967 MB
+whisper_model_name = "openai/whisper-medium" # multilingual, ~ 967 MB
 
 whisper_processor = WhisperProcessor.from_pretrained(whisper_model_name)
 whisper_model = WhisperForConditionalGeneration.from_pretrained(whisper_model_name).to(device)
