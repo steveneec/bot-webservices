@@ -5,7 +5,7 @@ import { unlink, writeFileSync } from 'fs';
 @Injectable()
 export class VoicetotextService {
   async getTextFromAudio(file: Express.Multer.File) {
-    const command = `python src/python/scripts/_whisper.py ${file.destination}/${file.filename}`;
+    const command = `python src/python/scripts/whisper.py ${file.destination}/${file.filename}`;
     const { stdout, stderr } = await exec(command);
     this.removeTempFile(file.filename);
     return { result: stdout };
@@ -22,7 +22,7 @@ export class VoicetotextService {
       ),
     );
 
-    const command = `python src/python/scripts/_whisper.py temp/${filename}`;
+    const command = `python src/python/scripts/whisper.py temp/${filename}`;
     const { stdout, stderr } = await exec(command);
     this.removeTempFile(filename);
     return { result: stdout };
