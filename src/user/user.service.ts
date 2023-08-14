@@ -28,4 +28,8 @@ export class UserService {
   async getUser(email: string) {
     return this.userModel.findOne({ email });
   }
+
+  async getUserById(id: string) {
+    return this.userModel.findById(id, ['-_id', '-password', '-__v']);
+  }
 }
