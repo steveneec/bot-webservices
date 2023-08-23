@@ -3,9 +3,9 @@ import { Configuration, OpenAIApi } from 'openai';
 
 @Injectable()
 export class GptService {
-  async fromGPT(apiKey: string, message: string) {
+  async fromGPT(message: string) {
     const configuration = new Configuration({
-      apiKey,
+      apiKey: process.env.GPTAPIKEY,
     });
 
     const openai = new OpenAIApi(configuration);
@@ -14,6 +14,6 @@ export class GptService {
       messages: [{ role: 'user', content: message }],
     });
 
-    return chat_completion;
+    return chat_completion.data.choices[0].message;
   }
 }

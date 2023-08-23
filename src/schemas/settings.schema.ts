@@ -6,10 +6,6 @@ export type SettingsDocument = HydratedDocument<Settings>;
 
 @Schema()
 export class Settings {
-  @Prop()
-  gptAPIKey: string;
-  @Prop()
-  mailSMTP: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'users' })
   user;
 }

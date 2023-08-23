@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { GptService } from 'src/gpt/gpt.service';
 import { VoicetotextService } from 'src/voicetotext/voicetotext.service';
+import { exec } from 'child-process-async';
 
 @Injectable()
 export class IntentsService {
@@ -17,6 +18,12 @@ export class IntentsService {
     //Process audioText to get intent
     //this.gptService.fromGPT('', '');
     return audioText;
+  }
+
+  async getIntent(text: string) {
+    const command = `python3 src/python/scripts/intents.py ${text}`;
+    const { stdout, stderr } = await exec(command);
+    return { stdout };
   }
 
   //useGPT
