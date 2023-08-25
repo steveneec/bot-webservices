@@ -3,6 +3,7 @@ import os
 import pathlib
 import pickle
 import sys
+import tensorflow as tf
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' 
 warnings.filterwarnings("ignore")
@@ -17,11 +18,10 @@ with open(pathlib.Path(__file__).parent.parent.__str__() + '/models/lstm_intents
 with open(pathlib.Path(__file__).parent.parent.__str__() + '/models/lstm_intents/lstm_encoder.pickle', 'rb') as f:
     encoder = pickle.load(f)
 
-with open(pathlib.Path(__file__).parent.parent.__str__() + '/models/lstm_intents/lstm_model.pickle', 'rb') as f:
-    model = pickle.load(f)
-
 with open(pathlib.Path(__file__).parent.parent.__str__() + '/models/lstm_intents/lstm_pad_sequences.pickle', 'rb') as f:
     pad_sequences = pickle.load(f)
+
+model = tf.keras.models.load_model(pathlib.Path(__file__).parent.parent.__str__() + '/models/lstm_intents/lstm_model.h5')
 
 input_seq = tokenizer.texts_to_sequences([sentence])
 input_features = pad_sequences(input_seq, maxlen = MAX_SEQ_LEN, padding = 'post')

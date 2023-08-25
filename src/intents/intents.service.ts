@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GptService } from 'src/gpt/gpt.service';
 import { VoicetotextService } from 'src/voicetotext/voicetotext.service';
 import { exec } from 'child-process-async';
+import axios from 'axios';
 
 @Injectable()
 export class IntentsService {
@@ -10,23 +11,18 @@ export class IntentsService {
     private readonly gptService: GptService,
   ) {}
 
-  async processIntent(data: string) {
-    //Get Text from Audio data
-    const audioText = await this.voicetotextService.getTextFromAudioBase64(
-      data,
-    );
-    //Process audioText to get intent
-    //this.gptService.fromGPT('', '');
-    return audioText;
-  }
-
   async getIntent(text: string) {
-    const command = `python3 src/python/scripts/intents.py ${text}`;
+    const command = `python src/python/scripts/intents.py ${text}`;
     const { stdout, stderr } = await exec(command);
-    return { stdout };
+    return stdout;
   }
 
-  //useGPT
-  //useLocalIntent
-  //useInternetSearch
+  async getYoutubeUrl(query: string) {
+    /*const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${query}&type=video&key=${process.env.YOUTUBEAPIKEY}`,
+    );*/
+
+    //return response.data.items[0].id.videoId;
+    return 'ERMXXIN3UQM';
+  }
 }
