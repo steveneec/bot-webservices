@@ -37,7 +37,7 @@ export const intentFunctions = [
       properties: {
         to: {
           type: 'string',
-          description: 'the email address',
+          description: 'the name of contact without email',
         },
         subject: {
           type: 'string',

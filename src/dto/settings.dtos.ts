@@ -1,4 +1,4 @@
 export class UpdateSettingsDTO {
-  gptAPIKey?: string;
-  mailSMTP?: string;
+  email?: string;
+  emailKey?: string;
 }

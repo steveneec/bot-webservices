@@ -10,6 +10,7 @@ import { SettingsModule } from './settings/settings.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ConfigModule } from '@nestjs/config';
     SettingsModule,
     AuthModule,
     UserModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
